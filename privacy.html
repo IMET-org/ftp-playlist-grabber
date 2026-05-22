@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy — FTP Playlist Grabber</title>
+    <meta
+      name="description"
+      content="Privacy Policy for the FTP Playlist Grabber Chrome Extension."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="container" style="max-width: 1080px">
+        <div class="nav-row">
+          <a href="index.html" class="nav-logo">
+            <div class="nav-logo-icon">📋</div>
+            <span class="nav-logo-name">FTP Playlist Grabber</span>
+          </a>
+          <a href="index.html" class="nav-back"> ← Back to home </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="doc">
+      <div class="container">
+        <div class="doc-eyebrow">Legal</div>
+        <h1 class="doc-title">Privacy Policy</h1>
+        <div class="doc-meta">
+          Last updated:
+          <!-- UPDATE THIS DATE BEFORE PUBLISHING -->
+          May 2025 &nbsp;·&nbsp; FTP Playlist Grabber v4.0
+        </div>
+
+        <div class="doc-body">
+          <div class="callout">
+            <p>
+              <strong>Summary:</strong> FTP Playlist Grabber does not collect,
+              transmit, or share any personal data. Everything happens locally
+              in your browser. We have no servers that receive your data.
+            </p>
+          </div>
+
+          <h2>1. Overview</h2>
+          <p>
+            FTP Playlist Grabber ("the Extension", "we", "our") is a Chrome
+            browser extension that scans FTP directory listing pages and exports
+            file lists as playlists. This Privacy Policy explains what
+            information the Extension accesses, how it is used, and how it is
+            stored.
+          </p>
+          <p>
+            By installing or using the Extension you agree to the practices
+            described in this policy.
+          </p>
+
+          <h2>2. Data We Do NOT Collect</h2>
+          <p>The Extension does <strong>not</strong>:</p>
+          <ul>
+            <li>Collect, transmit, or sell any personal information</li>
+            <li>
+              Send any data to our servers (we operate no backend servers)
+            </li>
+            <li>Track your browsing history</li>
+            <li>Use cookies or any cross-site tracking mechanisms</li>
+            <li>
+              Access any page other than the currently active tab when you
+              explicitly invoke the Extension
+            </li>
+            <li>
+              Communicate with any third-party analytics, advertising, or
+              data-collection service
+            </li>
+          </ul>
+
+          <h2>3. Data the Extension Accesses Locally</h2>
+          <p>
+            The Extension reads the following information solely to provide its
+            functionality. None of this information leaves your device.
+          </p>
+
+          <h2>3.1 Active Tab Content</h2>
+          <p>
+            When you click the Extension icon, it reads the HTML content of the
+            currently active browser tab to detect FTP directory listings and
+            extract file URLs. This happens entirely within your browser. The
+            Extension only accesses the tab you are actively viewing at the
+            moment you invoke it.
+          </p>
+
+          <h2>3.2 Local Storage (chrome.storage.local)</h2>
+          <p>
+            The Extension stores the following data locally on your device using
+            the Chrome <code>storage.local</code> API:
+          </p>
+          <ul>
+            <li>
+              <strong>User preferences</strong> — your settings such as default
+              export format, scan depth, dark/light mode preference, and other
+              UI options
+            </li>
+            <li>
+              <strong>Scan history</strong> — a log of recent scans (URLs
+              visited, file counts) used to populate the History tab
+            </li>
+            <li>
+              <strong>Session state</strong> — temporary data to restore the
+              popup state between opens
+            </li>
+          </ul>
+          <p>
+            This data is stored locally on your device only. It is never
+            transmitted externally. You can clear it at any time by uninstalling
+            the Extension or clearing Chrome's extension storage via
+            <code>chrome://settings</code>.
+          </p>
+
+          <h2>4. Chrome Permissions Explained</h2>
+          <p>
+            The Extension requests the following Chrome permissions. Each is
+            necessary for a specific feature:
+          </p>
+
+          <table class="perm-table">
+            <thead>
+              <tr>
+                <th>Permission</th>
+                <th>Why it is required</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>activeTab</td>
+                <td>
+                  Allows the Extension to read the HTML of the tab you are
+                  currently viewing — only when you click the Extension icon.
+                  Required to detect FTP directory listings and extract file
+                  URLs.
+                </td>
+              </tr>
+              <tr>
+                <td>scripting</td>
+                <td>
+                  Allows the Extension to inject a content script into the
+                  active tab to parse the FTP directory listing DOM. No scripts
+                  are injected without user action.
+                </td>
+              </tr>
+              <tr>
+                <td>storage</td>
+                <td>
+                  Allows the Extension to save your preferences and scan history
+                  locally using <code>chrome.storage.local</code>. Data never
+                  leaves your device.
+                </td>
+              </tr>
+              <tr>
+                <td>downloads</td>
+                <td>
+                  Allows the Extension to trigger a file download when you
+                  export a playlist — so the generated .m3u / .pls / etc. file
+                  is saved to your Downloads folder.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>5. Third-Party Services</h2>
+          <p>
+            The Extension does not integrate with, load code from, or send data
+            to any third-party service, API, or analytics platform. There are no
+            embedded trackers, no ad networks, and no crash-reporting services.
+          </p>
+
+          <h2>6. Children's Privacy</h2>
+          <p>
+            The Extension does not knowingly collect any data from anyone,
+            including children under the age of 13. Because no personal data is
+            collected at all, the Extension inherently complies with COPPA and
+            similar regulations regarding children's privacy.
+          </p>
+
+          <h2>7. Data Retention and Deletion</h2>
+          <p>
+            All data stored by the Extension (preferences and scan history)
+            lives exclusively in your browser's local extension storage. You can
+            delete it at any time by:
+          </p>
+          <ul>
+            <li>
+              Uninstalling the Extension from Chrome — this removes all
+              associated storage
+            </li>
+            <li>
+              Navigating to <code>chrome://settings/siteData</code> and clearing
+              extension data
+            </li>
+            <li>
+              Using the "Clear History" button in the Extension's History tab
+            </li>
+          </ul>
+          <p>
+            We have no copy of your data and cannot delete it on your behalf
+            because we never receive it.
+          </p>
+
+          <h2>8. Security</h2>
+          <p>
+            The Extension runs entirely within the Chrome extension sandbox. It
+            only accesses the active tab when explicitly invoked by you and does
+            not run background processes that read page content without your
+            action. The Extension is open source — you can audit the full source
+            code at any time.
+          </p>
+
+          <h2>9. Changes to This Policy</h2>
+          <p>
+            If we update this Privacy Policy, the revised version will be
+            published at this URL with an updated "Last updated" date. Continued
+            use of the Extension after any changes constitutes acceptance of the
+            revised policy. We do not anticipate significant changes because the
+            Extension fundamentally does not collect user data.
+          </p>
+
+          <h2>10. Contact</h2>
+          <p>
+            If you have questions or concerns about this Privacy Policy or the
+            Extension's behavior, please contact us:
+          </p>
+          <ul>
+            <li>
+              Email:
+              <a href="mailto:YOUR_EMAIL@example.com">YOUR_EMAIL@example.com</a>
+              <!-- Replace with your email -->
+            </li>
+            <li>
+              GitHub Issues:
+              <a
+                href="https://github.com/YOUR_GITHUB_URL/issues"
+                target="_blank"
+                rel="noopener"
+                >github.com/YOUR_GITHUB_URL/issues</a
+              >
+            </li>
+          </ul>
+          <p>We will respond to privacy-related inquiries within 30 days.</p>
+        </div>
+        <!-- .doc-body -->
+      </div>
+    </div>
+
+    <footer>
+      <div class="container" style="max-width: 1080px">
+        <div class="foot-row">
+          <span class="foot-brand">FTP Playlist Grabber v4.0</span>
+          <div class="foot-links">
+            <a href="index.html">Home</a>
+            <a
+              href="https://github.com/YOUR_GITHUB_URL"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+            <a
+              href="https://chrome.google.com/webstore/detail/YOUR_CWS_EXTENSION_ID"
+              target="_blank"
+              rel="noopener"
+              >Chrome Web Store</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FTP Playlist Grabber — Chrome Extension</title>
+    <meta
+      name="description"
+      content="Scan any FTP directory listing and export video & audio files as .m3u, .m3u8, .pls, .xspf, or .txt playlists. Free Chrome extension."
+    />
+    <meta property="og:title" content="FTP Playlist Grabber" />
+    <meta
+      property="og:description"
+      content="Turn any FTP index page into a playlist. Scan, filter, and export in seconds."
+    />
+    <meta property="og:type" content="website" />
+
+    <!-- ⚠ BEFORE PUBLISHING: Replace the two placeholders below -->
+    <!-- CWS_URL  → https://chrome.google.com/webstore/detail/YOUR_EXTENSION_ID        -->
+    <!-- GH_URL   → https://github.com/YOUR_USERNAME/ftp-playlist-grabber              -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ═══ NAV ═══ -->
+    <nav id="nav">
+      <div class="container">
+        <div class="nav-row">
+          <a href="/" class="nav-logo">
+            <div class="nav-logo-icon">📋</div>
+            <span class="nav-logo-name">FTP Playlist Grabber</span>
+          </a>
+          <div class="nav-links">
+            <a href="#features" class="btn-ghost-sm">Features</a>
+            <a href="#how" class="btn-ghost-sm">How it works</a>
+            <a
+              href="https://github.com/YOUR_GITHUB_URL"
+              class="btn-ghost-sm"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+            <a
+              href="https://chrome.google.com/webstore/detail/YOUR_CWS_EXTENSION_ID"
+              class="btn-chrome"
+              target="_blank"
+              rel="noopener"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="16" />
+                <line x1="8" y1="12" x2="16" y2="12" />
+              </svg>
+              Add to Chrome
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ═══ HERO ═══ -->
+    <section id="hero">
+      <div class="hero-blob blob-1"></div>
+      <div class="hero-blob blob-2"></div>
+      <div class="container">
+        <div class="hero-inner">
+          <!-- LEFT: text -->
+          <div class="hero-text">
+            <div class="hero-eyebrow">Chrome Extension · v4.0 · Free</div>
+            <h1 class="hero-title">
+              Turn Any FTP Index Into a <span class="grad">Playlist</span>
+            </h1>
+            <p class="hero-sub">
+              Scan FTP directory listing pages, detect every video and audio
+              file, and export them as ready-to-play playlists — in whatever
+              format your media player needs.
+            </p>
+            <div class="hero-cta">
+              <a
+                href="https://chrome.google.com/webstore/detail/YOUR_CWS_EXTENSION_ID"
+                class="btn-primary-lg"
+                target="_blank"
+                rel="noopener"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="white"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="16" />
+                  <line x1="8" y1="12" x2="16" y2="12" />
+                </svg>
+                Add to Chrome — Free
+              </a>
+              <a
+                href="https://github.com/YOUR_GITHUB_URL"
+                class="btn-outline-lg"
+                target="_blank"
+                rel="noopener"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                  />
+                </svg>
+                View Source
+              </a>
+            </div>
+            <div class="hero-badges">
+              <span class="hbadge">No account required</span>
+              <span class="hbadge">No data collected</span>
+              <span class="hbadge">Open source</span>
+            </div>
+          </div>
+
+          <!-- RIGHT: popup mockup -->
+          <div class="hero-visual">
+            <div class="popup-stage">
+              <div class="popup-glow"></div>
+              <div class="pp">
+                <div class="pp-beam"></div>
+
+                <div class="pp-hd">
+                  <div class="pp-icon">📋</div>
+                  <div class="pp-name">FTP Playlist Grabber</div>
+                  <span class="pp-gear">⚙</span>
+                </div>
+
+                <div class="pp-stats">
+                  <span class="pp-stat s-files">148 files</span>
+                  <span class="pp-stat s-sel">96 selected</span>
+                  <span class="pp-stat s-dupe">2 dupes</span>
+                  <span class="pp-stat s-gaps">3 gaps</span>
+                </div>
+
+                <div class="pp-scan">
+                  <span class="pp-scan-lbl">SCAN MODE</span>
+                  <div class="pp-toggle">
+                    <span>Quick</span><span class="on">Deep</span>
+                  </div>
+                  <span class="pp-depth">depth: 3</span>
+                </div>
+
+                <div class="pp-tabs">
+                  <div class="pp-tab on">Files</div>
+                  <div class="pp-tab">Tools</div>
+                  <div class="pp-tab">Stats</div>
+                  <div class="pp-tab">History</div>
+                </div>
+
+                <div class="pp-srch">
+                  <input type="text" value="Naruto S01" readonly />
+                </div>
+
+                <div class="pp-files">
+                  <div class="pp-folder">
+                    📁 Season 1 &nbsp;/&nbsp; 12 files
+                  </div>
+                  <div class="pp-file">
+                    <div class="pp-cb">✓</div>
+                    <div class="pp-fn">Naruto.S01E01.Enter.Naruto.720p.mkv</div>
+                    <div class="pp-bd mkv">.mkv</div>
+                  </div>
+                  <div class="pp-file">
+                    <div class="pp-cb">✓</div>
+                    <div class="pp-fn">
+                      Naruto.S01E02.My.Name.is.Konohamaru.mkv
+                    </div>
+                    <div class="pp-bd mkv">.mkv</div>
+                  </div>
+                  <div class="pp-file">
+                    <div class="pp-cb">✓</div>
+                    <div class="pp-fn">Naruto.S01E03.Sasuke.and.Sakura.mkv</div>
+                    <div class="pp-bd mkv">.mkv</div>
+                  </div>
+                  <div class="pp-file">
+                    <div class="pp-cb">✓</div>
+                    <div class="pp-fn">
+                      Naruto.S01E04.Pass.or.Fail.Survival.mkv
+                    </div>
+                    <div class="pp-bd mkv">.mkv</div>
+                  </div>
+                  <div class="pp-file" style="opacity: 0.45">
+                    <div class="pp-cb off"></div>
+                    <div class="pp-fn">
+                      Naruto.S01E05.You.Failed.Kakashi.Sensei.mkv
+                    </div>
+                    <div class="pp-bd mkv">.mkv</div>
+                  </div>
+                  <div class="pp-folder">
+                    📁 Season 2 &nbsp;/&nbsp; 18 files
+                  </div>
+                  <div class="pp-file">
+                    <div class="pp-cb">✓</div>
+                    <div class="pp-fn">
+                      Naruto.S02E01.The.Worst.Three.Way.Dead.mp4
+                    </div>
+                    <div class="pp-bd mp4">.mp4</div>
+                  </div>
+                  <div class="pp-file">
+                    <div class="pp-cb">✓</div>
+                    <div class="pp-fn">Naruto.S02E02.Ohhhh.Ronin.mkv</div>
+                    <div class="pp-bd mkv">.mkv</div>
+                  </div>
+                </div>
+
+                <div class="pp-foot">
+                  <div class="pp-fmts">
+                    <div class="pp-fmt on">.m3u</div>
+                    <div class="pp-fmt">.m3u8</div>
+                    <div class="pp-fmt">.pls</div>
+                    <div class="pp-fmt">.xspf</div>
+                    <div class="pp-fmt">.txt</div>
+                  </div>
+                  <div class="pp-exprow">
+                    <input
+                      class="pp-einput"
+                      value="Naruto-Season1-2"
+                      readonly
+                    />
+                    <div class="pp-ebtn">Export</div>
+                  </div>
+                </div>
+              </div>
+              <!-- .pp -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FEATURES ═══ -->
+    <section id="features">
+      <div class="container">
+        <div class="feat-hd reveal">
+          <div class="sec-label">Features</div>
+          <h2 class="sec-title">Everything you need for FTP playlists</h2>
+          <p class="sec-sub">
+            Built for power users with large FTP media collections. No setup, no
+            sign-in — install and scan.
+          </p>
+        </div>
+        <div class="feat-grid reveal" id="featGrid">
+          <div class="feat-card">
+            <div class="feat-ico" style="background: rgba(59, 130, 246, 0.1)">
+              ⚡
+            </div>
+            <div class="feat-name">Quick Scan</div>
+            <p class="feat-desc">
+              Instantly scans the active FTP index page and detects all video
+              and audio files. Results in under a second for most directories.
+            </p>
+          </div>
+          <div class="feat-card">
+            <div class="feat-ico" style="background: rgba(6, 182, 212, 0.1)">
+              🔁
+            </div>
+            <div class="feat-name">Deep Recursive Scan</div>
+            <p class="feat-desc">
+              Traverse every subdirectory automatically, up to 10 levels deep.
+              Watch real-time progress as the extension discovers files across
+              your entire server.
+            </p>
+          </div>
+          <div class="feat-card">
+            <div class="feat-ico" style="background: rgba(16, 185, 129, 0.1)">
+              📤
+            </div>
+            <div class="feat-name">5 Export Formats</div>
+            <p class="feat-desc">
+              Export as .m3u, .m3u8, .pls, .xspf, or plain .txt. Every format
+              works with VLC, Kodi, MPC-HC, MPV, Jellyfin, and more.
+            </p>
+          </div>
+          <div class="feat-card">
+            <div class="feat-ico" style="background: rgba(245, 158, 11, 0.1)">
+              🔍
+            </div>
+            <div class="feat-name">Live Filter & Search</div>
+            <p class="feat-desc">
+              Search by filename, extension, resolution, or episode number in
+              real time. Filter your selection down to exactly what you need
+              before exporting.
+            </p>
+          </div>
+          <div class="feat-card">
+            <div class="feat-ico" style="background: rgba(139, 92, 246, 0.1)">
+              🛠
+            </div>
+            <div class="feat-name">Playlist Toolkit</div>
+            <p class="feat-desc">
+              Episode gap finder, duplicate remover, find & replace, smart
+              episode sort, VLC command generator, and shuffle — all in the
+              Tools tab.
+            </p>
+          </div>
+          <div class="feat-card">
+            <div class="feat-ico" style="background: rgba(236, 72, 153, 0.1)">
+              📊
+            </div>
+            <div class="feat-name">Stats & History</div>
+            <p class="feat-desc">
+              See file type breakdowns, size distributions, and a full scan
+              history across sessions so you always know what's in every
+              directory.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ HOW IT WORKS ═══ -->
+    <section id="how">
+      <div class="container">
+        <div class="how-inner">
+          <div>
+            <div class="sec-label reveal">How it works</div>
+            <h2 class="sec-title reveal">Three steps to your playlist</h2>
+            <div class="how-steps">
+              <div class="how-step reveal">
+                <div class="how-num">01</div>
+                <div>
+                  <div class="how-stitle">Navigate to an FTP directory</div>
+                  <p class="how-sdesc">
+                    Open any Apache or nginx FTP directory listing in Chrome.
+                    The extension icon lights up automatically when it detects
+                    an index page.
+                  </p>
+                </div>
+              </div>
+              <div class="how-step reveal">
+                <div class="how-num">02</div>
+                <div>
+                  <div class="how-stitle">Click the icon & scan</div>
+                  <p class="how-sdesc">
+                    Choose Quick Scan for the current folder, or Deep Scan to
+                    recursively traverse every subdirectory. Configure depth and
+                    watch live progress.
+                  </p>
+                </div>
+              </div>
+              <div class="how-step reveal">
+                <div class="how-num">03</div>
+                <div>
+                  <div class="how-stitle">Select, filter, and export</div>
+                  <p class="how-sdesc">
+                    Use search and folder checkboxes to select exactly what you
+                    want. Pick your format, name the playlist, and hit Export.
+                    Done.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- browser mockup (desktop only) -->
+          <div class="how-visual reveal">
+            <div class="browser-mock">
+              <div class="brow-bar">
+                <div class="brow-dots">
+                  <span style="background: #ff5f57"></span>
+                  <span style="background: #ffbd2e"></span>
+                  <span style="background: #28c840"></span>
+                </div>
+                <div class="brow-url">ftp.example.com /media/anime/Naruto/</div>
+              </div>
+              <div class="brow-body">
+                <div class="ftp-header">Index of /media/anime/Naruto/</div>
+                <div
+                  class="ftp-sep"
+                  style="color: var(--muted); font-size: 9.5px"
+                >
+                  ─────────────────────────────────────
+                </div>
+                <div class="ftp-row">
+                  <span>📁</span><a>Season 1/</a><span class="ftp-size">–</span>
+                </div>
+                <div class="ftp-row">
+                  <span>📁</span><a>Season 2/</a><span class="ftp-size">–</span>
+                </div>
+                <div class="ftp-row">
+                  <span>📁</span><a>Season 3/</a><span class="ftp-size">–</span>
+                </div>
+                <div class="ftp-row" style="margin-top: 6px">
+                  <span>📄</span>
+                  <span style="color: #a78bfa"
+                    >Naruto.S01E01.Enter.Naruto.720p.mkv</span
+                  >
+                  <span class="ftp-size">1.1 GB</span>
+                </div>
+                <div class="ftp-row">
+                  <span>📄</span>
+                  <span style="color: #a78bfa"
+                    >Naruto.S01E02.Konohamaru.720p.mkv</span
+                  >
+                  <span class="ftp-size">1.0 GB</span>
+                </div>
+                <div class="ftp-alert">
+                  ✓ FTP Playlist Grabber detected 148 files across 3
+                  subdirectories — click the extension icon to scan
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FORMATS ═══ -->
+    <section id="formats">
+      <div class="container">
+        <div class="fmt-hd reveal">
+          <div class="sec-label">Export Formats</div>
+          <h2 class="sec-title">Compatible with every media player</h2>
+          <p class="sec-sub">
+            Five formats covering every major playback and streaming setup.
+          </p>
+        </div>
+        <div class="fmt-grid reveal">
+          <div class="fmt-card">
+            <div class="fmt-ext" style="color: #60a5fa">.m3u</div>
+            <div class="fmt-name">M3U Playlist</div>
+            <p class="fmt-desc">
+              Universal standard. Works in VLC, Kodi, MPC-HC, MPV, and Windows
+              Media Player.
+            </p>
+          </div>
+          <div class="fmt-card">
+            <div class="fmt-ext" style="color: #34d399">.m3u8</div>
+            <div class="fmt-name">UTF-8 M3U</div>
+            <p class="fmt-desc">
+              Unicode-safe variant. Perfect for filenames with non-ASCII or
+              international characters.
+            </p>
+          </div>
+          <div class="fmt-card">
+            <div class="fmt-ext" style="color: #a78bfa">.pls</div>
+            <div class="fmt-name">PLS Playlist</div>
+            <p class="fmt-desc">
+              Winamp-compatible format. Includes title and length metadata
+              fields.
+            </p>
+          </div>
+          <div class="fmt-card">
+            <div class="fmt-ext" style="color: #fb923c">.xspf</div>
+            <div class="fmt-name">XSPF / Spiff</div>
+            <p class="fmt-desc">
+              XML-based open standard. Full metadata support, used by VLC and
+              Rhythmbox.
+            </p>
+          </div>
+          <div class="fmt-card">
+            <div class="fmt-ext" style="color: #f472b6">.txt</div>
+            <div class="fmt-name">Plain Text</div>
+            <p class="fmt-desc">
+              One URL per line. Ideal for scripting, wget/aria2 batch downloads,
+              and custom pipelines.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TOOLS ═══ -->
+    <section id="tools">
+      <div class="container">
+        <div class="tools-inner">
+          <div>
+            <div class="sec-label reveal">Toolkit</div>
+            <h2 class="sec-title reveal">More than just a scanner</h2>
+            <p class="sec-sub reveal" style="margin-bottom: 28px">
+              The Tools tab packs six utilities for managing, cleaning, and
+              perfecting your playlist before you export.
+            </p>
+            <div class="tools-list reveal">
+              <div class="tool-row">
+                <div class="tool-ico">🔍</div>
+                <div>
+                  <div class="tool-name">Episode Gap Finder</div>
+                  <p class="tool-desc">
+                    Detect missing episodes by season automatically. Shows
+                    exactly which SxxExx numbers are absent.
+                  </p>
+                </div>
+              </div>
+              <div class="tool-row">
+                <div class="tool-ico">✏️</div>
+                <div>
+                  <div class="tool-name">Find & Replace</div>
+                  <p class="tool-desc">
+                    Batch-rename entries in the playlist. Fix path prefixes or
+                    update URLs after a server migration.
+                  </p>
+                </div>
+              </div>
+              <div class="tool-row">
+                <div class="tool-ico">🗑️</div>
+                <div>
+                  <div class="tool-name">Remove Duplicates</div>
+                  <p class="tool-desc">
+                    Detect and remove duplicate file entries that surface across
+                    multiple subdirectory scans.
+                  </p>
+                </div>
+              </div>
+              <div class="tool-row">
+                <div class="tool-ico">↕️</div>
+                <div>
+                  <div class="tool-name">Smart Episode Sort</div>
+                  <p class="tool-desc">
+                    Sorts files by SxxExx pattern intelligently, even when
+                    filenames are inconsistently formatted.
+                  </p>
+                </div>
+              </div>
+              <div class="tool-row">
+                <div class="tool-ico">🖥️</div>
+                <div>
+                  <div class="tool-name">VLC Command Generator</div>
+                  <p class="tool-desc">
+                    Outputs a ready-to-run VLC CLI command to open and play your
+                    entire selection directly.
+                  </p>
+                </div>
+              </div>
+              <div class="tool-row">
+                <div class="tool-ico">🔀</div>
+                <div>
+                  <div class="tool-name">Shuffle</div>
+                  <p class="tool-desc">
+                    Randomize playlist order before exporting for shuffle-mode
+                    playback in any media player.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- tools popup mockup (desktop only) -->
+          <div
+            class="tools-popup-wrap reveal"
+            style="display: flex; justify-content: center"
+          >
+            <div class="tools-popup">
+              <div
+                class="pp-hd"
+                style="background: linear-gradient(135deg, #0d1b38, #0f1f3e)"
+              >
+                <div class="pp-icon">📋</div>
+                <div class="pp-name">FTP Playlist Grabber</div>
+                <span class="pp-gear">⚙</span>
+              </div>
+              <div class="pp-tabs">
+                <div class="pp-tab">Files</div>
+                <div class="pp-tab on">Tools</div>
+                <div class="pp-tab">Stats</div>
+                <div class="pp-tab">History</div>
+              </div>
+              <div style="padding: 10px 10px 12px">
+                <div class="tp-row active">
+                  <div class="tp-rtitle">🔍 Episode Gap Finder</div>
+                  <div class="tp-result">
+                    S01: Missing E07, E19<br />S02: Missing E12, E14<br /><span
+                      style="color: #34d399"
+                      >✓ No gaps in S03</span
+                    >
+                  </div>
+                </div>
+                <div class="tp-row">
+                  <div class="tp-rtitle">✏️ Find &amp; Replace</div>
+                </div>
+                <div class="tp-row">
+                  <div class="tp-rtitle">
+                    🗑️ Remove Duplicates
+                    <span
+                      style="
+                        margin-left: auto;
+                        font-family: var(--ff-mono);
+                        font-size: 8.5px;
+                        color: #f87171;
+                        background: rgba(239, 68, 68, 0.1);
+                        padding: 2px 5px;
+                        border-radius: 3px;
+                      "
+                      >2 found</span
+                    >
+                  </div>
+                </div>
+                <div class="tp-row">
+                  <div class="tp-rtitle">↕️ Smart Episode Sort</div>
+                </div>
+                <div class="tp-row">
+                  <div class="tp-rtitle">🖥️ VLC Command Generator</div>
+                </div>
+                <div class="tp-row">
+                  <div class="tp-rtitle">🔀 Shuffle Playlist</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ INSTALL CTA ═══ -->
+    <section id="install">
+      <div class="container">
+        <div class="cta-card reveal">
+          <div class="cta-icon">📋</div>
+          <h2 class="cta-title">Ready to build your first playlist?</h2>
+          <p class="cta-sub">
+            Free, open source, and takes 10 seconds to install. Works on any
+            Apache or nginx FTP directory listing page, on any server.
+          </p>
+          <div class="cta-btns">
+            <a
+              href="https://chrome.google.com/webstore/detail/YOUR_CWS_EXTENSION_ID"
+              class="btn-primary-lg"
+              target="_blank"
+              rel="noopener"
+              style="font-size: 16px; padding: 15px 28px"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                stroke-width="2.5"
+                stroke-linecap="round"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="16" />
+                <line x1="8" y1="12" x2="16" y2="12" />
+              </svg>
+              Add to Chrome — Free
+            </a>
+            <a href="privacy.html" class="btn-outline-lg">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer>
+      <div class="container">
+        <div class="foot-row">
+          <div class="foot-left">
+            <span class="foot-brand">FTP Playlist Grabber</span>
+            <span class="foot-ver">v4.0 · Open Source</span>
+          </div>
+          <div class="foot-links">
+            <a
+              href="https://github.com/YOUR_GITHUB_URL"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+            <a href="privacy.html">Privacy Policy</a>
+            <a
+              href="https://chrome.google.com/webstore/detail/YOUR_CWS_EXTENSION_ID"
+              target="_blank"
+              rel="noopener"
+              >Chrome Web Store</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // ── Nav scroll shadow
+      const nav = document.getElementById("nav");
+      window.addEventListener(
+        "scroll",
+        () => {
+          nav.classList.toggle("scrolled", window.scrollY > 20);
+        },
+        { passive: true },
+      );
+
+      // ── Scroll reveal (IntersectionObserver)
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            el.classList.add("vis");
+
+            // Stagger feature cards individually
+            if (el.id === "featGrid") {
+              el.querySelectorAll(".feat-card").forEach((card, i) => {
+                card.style.opacity = "0";
+                card.style.transform = "translateY(18px)";
+                card.style.transition = "opacity .5s ease, transform .5s ease";
+                setTimeout(() => {
+                  card.style.opacity = "1";
+                  card.style.transform = "none";
+                }, i * 70);
+              });
+            }
+
+            // Stagger tool rows
+            if (el.classList.contains("tools-list")) {
+              el.querySelectorAll(".tool-row").forEach((row, i) => {
+                row.style.opacity = "0";
+                row.style.transform = "translateX(-14px)";
+                row.style.transition = "opacity .45s ease, transform .45s ease";
+                setTimeout(() => {
+                  row.style.opacity = "1";
+                  row.style.transform = "none";
+                }, i * 55);
+              });
+            }
+
+            observer.unobserve(el);
+          });
+        },
+        { threshold: 0.08 },
+      );
+
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>
